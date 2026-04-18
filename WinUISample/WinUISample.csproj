@@ -38,8 +38,8 @@
 
 	<ItemGroup>
 		<PackageReference Include="DSoft.System.Mvvm" Version="3.3.2405.241" />
-		<PackageReference Include="Microsoft.Windows.SDK.BuildTools" Version="10.0.26100.1" />
-		<PackageReference Include="Microsoft.WindowsAppSDK" Version="1.5.240607001" />
+		<PackageReference Include="Microsoft.Windows.SDK.BuildTools" Version="10.0.28000.1721" />
+		<PackageReference Include="Microsoft.WindowsAppSDK" Version="1.8.260317003" />
 		<Manifest Include="$(ApplicationManifest)" />
 	</ItemGroup>
 
