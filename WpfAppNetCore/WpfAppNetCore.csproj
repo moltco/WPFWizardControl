@@ -61,4 +61,12 @@
 		</Page>
 	</ItemGroup>
 
+	<ItemGroup>
+	  <Folder Include="Themes\" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Page Include="..\WinUISample\Themes\Generic.xaml" Link="Themes\Generic.xaml" />
+	</ItemGroup>
+
 </Project>
