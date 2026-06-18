@@ -22,7 +22,7 @@ namespace WinUISample.TestData.Pages
 {
     public sealed partial class CompletePageView : UserControl, IWizardPage
     {
-        private SharedViewModel _viewModel;
+        private SharedViewModel _viewModel = null!;
 
         public SharedViewModel ViewModel
         {

@@ -11,9 +11,9 @@ namespace WinUISample.TestData
 {
     public class SharedViewModel : ViewModel
     {
-        private string _code;
-        private string _bankAccountName;
-        private string datbaseName;
+        private string _code = null!;
+        private string _bankAccountName = null!;
+        private string datbaseName = null!;
         private IWizardControl _wizardControl;
 
         public string Code
@@ -42,7 +42,7 @@ namespace WinUISample.TestData
             set { _hidePage2 = value; NotifyPropertyChanged(nameof(HidePage2)); _wizardControl.RecalculateNavigation(); }
         }
 
-        public Action MoveNextAction { get; set; }
+        public Action? MoveNextAction { get; set; }
 
         public ICommand MoveNextPageCommand
         {

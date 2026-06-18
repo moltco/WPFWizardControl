@@ -22,7 +22,7 @@ namespace WpfAppNetCore.TestData.Pages
     public partial class ProcessingPage : UserControl, IWizardPage
     {
 
-        private SharedViewModel _viewModel;
+        private SharedViewModel _viewModel = null!;
 
 
         public SharedViewModel ViewModel

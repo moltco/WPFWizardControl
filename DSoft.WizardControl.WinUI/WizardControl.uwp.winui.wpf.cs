@@ -29,12 +29,12 @@ namespace DSoft.WizardControl
     public class WizardControl : Control, IWizardControl
     {
         #region Controls
-        private ContentControl _contentGrid;
-        private Button _btnNext;
-        private Button _btnPrevious;
-        private Button _btnCancel;
-        private Button _btnFinish;
-        private Button _btnComplete;
+        private ContentControl? _contentGrid;
+        private Button? _btnNext;
+        private Button? _btnPrevious;
+        private Button? _btnCancel;
+        private Button? _btnFinish;
+        private Button? _btnComplete;
 
         #endregion
         private WizardStage _currentStage = WizardStage.Setup;
@@ -960,7 +960,7 @@ namespace DSoft.WizardControl
         /// Gets the available pages.
         /// </summary>
         /// <value>The available pages.</value>
-        public List<IWizardPage> AvailablePages => Pages?.ToList();
+        public List<IWizardPage> AvailablePages => Pages?.ToList() ?? new List<IWizardPage>();
 
         #endregion
 
@@ -1361,11 +1361,16 @@ namespace DSoft.WizardControl
             });
 
 #if WINUI
-            _btnNext.Command = NextCommand;
-            _btnPrevious.Command = PreviousCommand;
-            _btnCancel.Command = CancelCommand;
-            _btnComplete.Command = CompleteCommand;
-            _btnFinish.Command = ProcessButtonCommand;
+            if (_btnNext != null)
+                _btnNext.Command = NextCommand;
+            if (_btnPrevious != null)
+                _btnPrevious.Command = PreviousCommand;
+            if (_btnCancel != null)
+                _btnCancel.Command = CancelCommand;
+            if (_btnComplete != null)
+                _btnComplete.Command = CompleteCommand;
+            if (_btnFinish != null)
+                _btnFinish.Command = ProcessButtonCommand;
 #endif
 
             if (Pages != null)
@@ -1473,7 +1478,8 @@ namespace DSoft.WizardControl
         {
             if (Pages == null || Pages.Count == 0)
             {
-                _contentGrid.Content = ProcessingPage;
+                if (_contentGrid != null)
+                    _contentGrid.Content = ProcessingPage;
 
                 return;
             }
@@ -1793,7 +1799,7 @@ namespace DSoft.WizardControl
 
                 if (page != null)
                 {
-                    subTitle = page.PageConfig?.Title;
+                    subTitle = page.PageConfig?.Title ?? string.Empty;
                 }
             }
 

@@ -1,18 +1,19 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
-    <Product>$(AssemblyName) ($(TargetFramework))</Product>
-    <Version>1.3.0</Version>
-    <Description>DSoft.WizardControl.Core is a core library for DSoft.WizardControl.WPF</Description>
-    <PackageTags>WPF Wizard</PackageTags>
-    <PackageReleaseNotes>Initial Release
-    </PackageReleaseNotes>
-	<PackageReadmeFile>README.md</PackageReadmeFile>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>netstandard2.0</TargetFramework>
+		<Product>$(AssemblyName) ($(TargetFramework))</Product>
+		<Version>1.3.0</Version>
+		<Description>DSoft.WizardControl.Core is a core library for DSoft.WizardControl.WPF</Description>
+		<PackageTags>WPF Wizard</PackageTags>
+		<PackageReleaseNotes>
+			Initial Release
+		</PackageReleaseNotes>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
+	</PropertyGroup>
 
 	<ItemGroup>
 		<None Include="README.md" Pack="true" PackagePath="\" />
 	</ItemGroup>
-	
+
 </Project>

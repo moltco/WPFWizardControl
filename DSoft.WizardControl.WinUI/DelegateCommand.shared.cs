@@ -20,7 +20,7 @@ namespace DSoft.WizardControl
 		/// Gets or sets the execute changed.
 		/// </summary>
 		/// <value>The execute changed.</value>
-		public static Action<EventHandler, bool> ExecuteChanged { get; set; }
+		public static Action<EventHandler?, bool>? ExecuteChanged { get; set; }
 
 		/// <summary>
 		/// If set, the ViewModels will requery an ICommand properties when NotifyPropertyChanged is set
@@ -30,9 +30,9 @@ namespace DSoft.WizardControl
         #endregion
 
         #region Fields
-        private ExecuteMethod executeMethod;
-        private ExecuteMethodWithParameter executeMethodWithParam;
-        private Func<object, bool> canExecute;
+        private ExecuteMethod? executeMethod;
+        private ExecuteMethodWithParameter? executeMethodWithParam;
+        private Func<object?, bool>? canExecute;
 		#endregion
 
 		#region Properties
@@ -44,7 +44,7 @@ namespace DSoft.WizardControl
 		/// Delegate ExecuteMethodWithParameter
 		/// </summary>
 		/// <param name="parameter">The parameter.</param>
-		public delegate void ExecuteMethodWithParameter(object parameter);
+		public delegate void ExecuteMethodWithParameter(object? parameter);
 		#endregion
 
 		#region Events
@@ -54,7 +54,7 @@ namespace DSoft.WizardControl
 		/// Occurs when changes occur that affect whether or not the command should execute.
 		/// </summary>
 		/// <returns></returns>
-		public event EventHandler CanExecuteChanged
+		public event EventHandler? CanExecuteChanged
         {
             add
             {
@@ -94,7 +94,7 @@ namespace DSoft.WizardControl
 		/// </summary>
 		/// <param name="exec">The execute method</param>
 		/// <param name="canExecutePredicate">Predicate Function with object parameter</param>
-		public DelegateCommand(ExecuteMethod exec, Func<object, bool> canExecutePredicate)
+		public DelegateCommand(ExecuteMethod exec, Func<object?, bool> canExecutePredicate)
             : this(exec)
         {
             canExecute = canExecutePredicate;
@@ -105,7 +105,7 @@ namespace DSoft.WizardControl
 		/// </summary>
 		/// <param name="exec">The execute method that takes a parameter</param>
 		/// <param name="canExecutePredicate">Predicate Function with object parameter</param>
-		public DelegateCommand(ExecuteMethodWithParameter exec, Func<object, bool> canExecutePredicate)
+		public DelegateCommand(ExecuteMethodWithParameter exec, Func<object?, bool> canExecutePredicate)
             : this(exec)
         {
             canExecute = canExecutePredicate;
@@ -148,7 +148,7 @@ namespace DSoft.WizardControl
 		/// </summary>
 		/// <param name="parameter">Data used by the command.  If the command does not require data to be passed, this object can be set to null.</param>
 		/// <returns>true if this command can be executed; otherwise, false.</returns>
-		public bool CanExecute(object parameter)
+		public bool CanExecute(object? parameter)
         {
             if (canExecute == null)
             {
@@ -164,7 +164,7 @@ namespace DSoft.WizardControl
 		/// Defines the method to be called when the command is invoked.
 		/// </summary>
 		/// <param name="parameter">Data used by the command.  If the command does not require data to be passed, this object can be set to null.</param>
-		public void Execute(object parameter)
+		public void Execute(object? parameter)
         {
             if (executeMethod != null)
                 executeMethod();

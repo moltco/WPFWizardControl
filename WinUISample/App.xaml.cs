@@ -46,6 +46,6 @@ namespace WinUISample
             m_window.AppWindow.Resize(new Windows.Graphics.SizeInt32(1024, 768));
         }
 
-        private Window m_window;
+        private Window m_window = null!;
     }
 }

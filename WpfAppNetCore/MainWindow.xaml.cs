@@ -20,7 +20,7 @@ namespace WpfAppNetCore
     /// </summary>
     public partial class MainWindow : Window
     {
-        private MainWindowViewModel _viewModel;
+        private MainWindowViewModel _viewModel = null!;
 
         public MainWindowViewModel ViewModel
         {
@@ -37,7 +37,7 @@ namespace WpfAppNetCore
 			ViewModel.OnRequestCloseWindow += OnCloseWindowRequest;
         }
 
-        private void OnCloseWindowRequest(object sender, bool e)
+        private void OnCloseWindowRequest(object? sender, bool e)
         {
             this.Close();
         }
