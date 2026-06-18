@@ -16,16 +16,16 @@ namespace WpfAppNetCore
     public class MainWindowViewModel : ViewModel
     {
         #region Fields
-        private SharedViewModel _sharedViewModel;
-        private ObservableCollection<IWizardPage> _pages;
-        private string _title;
-        private IWizardPage _completePage;
-        private IWizardPage _errorPage;
-        private IWizardPage _processingPage;
-        private IWizardPage _selectedPage;
+        private SharedViewModel _sharedViewModel = null!;
+        private ObservableCollection<IWizardPage> _pages = null!;
+        private string _title = null!;
+        private IWizardPage _completePage = null!;
+        private IWizardPage _errorPage = null!;
+        private IWizardPage _processingPage = null!;
+        private IWizardPage _selectedPage = null!;
         #endregion
 
-        public event EventHandler<bool> OnRequestCloseWindow;
+        public event EventHandler<bool>? OnRequestCloseWindow;
 
         public string Title
         {

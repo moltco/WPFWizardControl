@@ -22,7 +22,7 @@ namespace WinUISample.TestData.Pages
 {
     public sealed partial class PageOne : UserControl, IWizardPage
     {
-        private SharedViewModel _viewModel;
+        private SharedViewModel _viewModel = null!;
         private IWizardControl _wizardControl;
 
         public SharedViewModel ViewModel
@@ -48,7 +48,7 @@ namespace WinUISample.TestData.Pages
         public void OnShown(IWizardControl wizard)
         {
             //wizard.SetButtonVisibility(WizardButtonVisibility.Hidden, WizardButtons.All);
-
+            wizard.UpdateButtonStyle(WizardButtons.Next, "WizardTestRedButtonStyle");
         }
 
         public Task<bool> ValidateAsync()

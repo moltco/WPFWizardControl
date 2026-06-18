@@ -23,7 +23,7 @@ namespace WinUISample
     /// </summary>
     public sealed partial class MainPage : Page
     {
-        private MainWindowViewModel _viewModel;
+        private MainWindowViewModel _viewModel = null!;
 
         public MainWindowViewModel ViewModel
         {
@@ -39,7 +39,7 @@ namespace WinUISample
             ViewModel.OnRequestCloseWindow += OnCloseWindowRequest;
         }
 
-        private void OnCloseWindowRequest(object sender, bool e)
+        private void OnCloseWindowRequest(object? sender, bool e)
         {
             
         }

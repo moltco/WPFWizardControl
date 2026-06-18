@@ -13,7 +13,7 @@ namespace DSoft.WizardControl.Core
 		/// Gets or sets the title.
 		/// </summary>
 		/// <value>The title.</value>
-		public string Title { get; set; }
+		public string? Title { get; set; }
 
 		/// <summary>
 		/// Gets or sets a value indicating whether this instance is hidden.
@@ -37,13 +37,13 @@ namespace DSoft.WizardControl.Core
 		/// Called when the page navigation is occuring
 		/// </summary>
 		/// <value>The navigation handler.</value>
-		public Action<WizardNavigationEventArgs> NavigationHandler { get; set; }
+		public Action<WizardNavigationEventArgs>? NavigationHandler { get; set; }
 
 		/// <summary>
 		/// Gets or sets the on page shown handler.
 		/// </summary>
 		/// <value>The on page shown handler.</value>
-		public Action<IWizardControl> OnPageShownHandler { get; set; }
+		public Action<IWizardControl>? OnPageShownHandler { get; set; }
 
 		/// <summary>
 		/// Initializes a new instance of the <see cref="WizardPageConfiguration"/> class.

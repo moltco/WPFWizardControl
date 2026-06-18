@@ -22,7 +22,7 @@ namespace WpfAppNetCore.TestData.Pages
     public partial class PageOne : UserControl, IWizardPage
     {
 
-        private SharedViewModel _viewModel;
+        private SharedViewModel _viewModel = null!;
         private IWizardControl _wizardControl;
 
         public SharedViewModel ViewModel
@@ -48,6 +48,7 @@ namespace WpfAppNetCore.TestData.Pages
         public void OnShown(IWizardControl wizard)
         {
             //wizard.SetButtonVisibility(WizardButtonVisibility.Hidden, WizardButtons.All);
+            wizard.UpdateButtonStyle(WizardButtons.Next, "WizardTestRedButtonStyle");
 
         }
 

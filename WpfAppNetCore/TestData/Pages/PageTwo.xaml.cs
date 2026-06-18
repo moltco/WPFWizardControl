@@ -21,7 +21,7 @@ namespace WpfAppNetCore.TestData.Pages
     /// </summary>
     public partial class PageTwo : UserControl, IWizardPage
     {
-        private SharedViewModel _viewModel;
+        private SharedViewModel _viewModel = null!;
 
         public SharedViewModel ViewModel
         {

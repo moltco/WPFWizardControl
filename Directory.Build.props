@@ -14,6 +14,7 @@
 		<LangVersion>Latest</LangVersion>
 		<Configurations>Debug;Release</Configurations>
 		<NoWarn>1701;1702;CS8002</NoWarn>
+		<Nullable>enable</Nullable>
 	</PropertyGroup>
 
 	<ItemGroup>
