@@ -34,7 +34,7 @@ steps:
 - task: DotNetCoreCLI@2
   inputs:
     command: 'restore'
-    projects: '*.sln'
+    projects: '$(solution)'
   
 - task: DotNetCoreCLI@2
   displayName: dotnet build
