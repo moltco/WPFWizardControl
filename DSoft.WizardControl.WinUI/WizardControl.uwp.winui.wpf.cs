@@ -284,7 +284,21 @@ namespace DSoft.WizardControl
         {
             get
             {
-                return ActivePages.Max(x => x.Key);
+                var pages = Pages;
+                if (pages == null)
+                    return -1;
+
+                var processingPage = ProcessingPage;
+                var completePage = CompletePage;
+                var errorPage = ErrorPage;
+
+                for (int i = pages.Count - 1; i >= 0; i--)
+                {
+                    if (IsActivePage(pages[i], processingPage, completePage, errorPage))
+                        return i;
+                }
+
+                return -1;
             }
         }
 
@@ -298,20 +312,36 @@ namespace DSoft.WizardControl
             {
                 var aDict = new Dictionary<int, IWizardPage>();
 
+                var pages = Pages;
+                if (pages == null)
+                    return aDict;
 
-                var aPages = Pages.Where(x => x != null && x.PageConfig != null && x.PageConfig.IsHidden.Equals(false) && (!x.Equals(ProcessingPage) && !x.Equals(CompletePage) && !x.Equals(ErrorPage)));
+                var processingPage = ProcessingPage;
+                var completePage = CompletePage;
+                var errorPage = ErrorPage;
 
-                if (aPages.Any())
+                for (int i = 0; i < pages.Count; i++)
                 {
-                    foreach (var aPage in aPages)
-                    {
-                        aDict.Add(Pages.IndexOf(aPage), aPage);
-                    }
+                    var aPage = pages[i];
+                    if (IsActivePage(aPage, processingPage, completePage, errorPage))
+                        aDict.Add(i, aPage);
                 }
-
 
                 return aDict;
             }
+        }
+
+        /// <summary>
+        /// Determines whether the page participates in navigation (visible and not a special page).
+        /// </summary>
+        private static bool IsActivePage(IWizardPage? page, IWizardPage? processingPage, IWizardPage? completePage, IWizardPage? errorPage)
+        {
+            return page != null
+                && page.PageConfig != null
+                && !page.PageConfig.IsHidden
+                && !page.Equals(processingPage)
+                && !page.Equals(completePage)
+                && !page.Equals(errorPage);
         }
 
         /// <summary>
@@ -974,7 +1004,7 @@ namespace DSoft.WizardControl
         {
             get
             {
-                if (Pages.Count == 0 || ActivePages.Count == 0)
+                if (Pages.Count == 0 || LastActivePageIndex < 0)
                     return false;
 
                 switch (_currentStage)
@@ -1007,7 +1037,7 @@ namespace DSoft.WizardControl
         {
             get
             {
-                if (Pages.Count == 0 || ActivePages.Count == 0)
+                if (Pages.Count == 0 || LastActivePageIndex < 0)
                     return false;
 
                 switch (_currentStage)
@@ -1021,7 +1051,7 @@ namespace DSoft.WizardControl
                         return false;
 
                     default:
-                        return SelectedIndex != ActivePages.Max(x => x.Key);
+                        return SelectedIndex != LastActivePageIndex;
                 }
 
 
@@ -1036,7 +1066,7 @@ namespace DSoft.WizardControl
         {
             get
             {
-                if (Pages.Count == 0 || ActivePages.Count == 0)
+                if (Pages.Count == 0 || LastActivePageIndex < 0)
                     return false;
 
                 if (ProcessMode == ProcessMode.None)
@@ -1051,7 +1081,7 @@ namespace DSoft.WizardControl
                         return false;
 
                     default:
-                        return SelectedIndex == ActivePages.Max(x => x.Key);
+                        return SelectedIndex == LastActivePageIndex;
                 }
 
 
@@ -1066,12 +1096,12 @@ namespace DSoft.WizardControl
         {
             get
             {
-                if (Pages.Count == 0 || ActivePages.Count == 0)
+                if (Pages.Count == 0 || LastActivePageIndex < 0)
                     return false;
 
                 if (ProcessMode == ProcessMode.None)
                 {
-                    if (SelectedIndex == ActivePages.Max(x => x.Key))
+                    if (SelectedIndex == LastActivePageIndex)
                         return false;
                 }
                 switch (_currentStage)
@@ -1095,12 +1125,12 @@ namespace DSoft.WizardControl
         {
             get
             {
-                if (Pages.Count == 0 || ActivePages.Count == 0)
+                if (Pages.Count == 0 || LastActivePageIndex < 0)
                     return false;
 
                 if (ProcessMode == ProcessMode.None)
                 {
-                    if (SelectedIndex == ActivePages.Max(x => x.Key))
+                    if (SelectedIndex == LastActivePageIndex)
                         return true;
                 }
 
@@ -1864,7 +1894,7 @@ namespace DSoft.WizardControl
         /// <returns>System.Int32.</returns>
         private int GetNextPageIndex(int currentIndex)
         {
-            if (currentIndex == ActivePages.Max(x => x.Key))
+            if (currentIndex == LastActivePageIndex)
                 return currentIndex;
 
             var newIndex = currentIndex + 1;
