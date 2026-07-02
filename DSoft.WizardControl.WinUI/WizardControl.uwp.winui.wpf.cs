@@ -1788,7 +1788,6 @@ namespace DSoft.WizardControl
                     {
                         var buttonState = new WizardButtonState(
                             button,
-                            //WizardButtonVisibility.Visible,
                             visibility,
                             ButtonStyle,
                             ButtonStyle
